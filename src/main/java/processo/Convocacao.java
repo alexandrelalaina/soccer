@@ -124,12 +124,6 @@ public class Convocacao {
             listaSelecoes.add(branco);
         }
 
-//        List<Atleta> listaSorteio = new ArrayList<>();
-//        List<Atleta> listaAtletasDefesa = ordenarAtletasPosicaoNivel(Posicao.DEFESA);
-//        List<Atleta> listaAtletasMeio = ordenarAtletasPosicaoNivel(Posicao.MEIO);
-//        List<Atleta> listaAtletasAtaque = ordenarAtletasPosicaoNivel(Posicao.ATAQUE);
-
-        // ATAQUE
         int iPosicao = 1;
         int qtdAtletasNaPosicao = 0;
         int qtdAtletasNaPosicaoEscalados = 0;
@@ -137,6 +131,7 @@ public class Convocacao {
         boolean sorteioFinalizado = false;
         List<Atleta> listaSorteio = new ArrayList<>();
 
+        // TODO pensar em criar classe Posicao
         while (! sorteioFinalizado) {
             qtdAtletasNaPosicaoEscalados = 0;
             if (iPosicao==1){
@@ -250,8 +245,20 @@ public class Convocacao {
         return filtro;
     }
 
-    private void imprimirSelecoesEscaladas(){
-
+    public void imprimirSelecoesEscaladas(List<Selecao> listaSelecoes){
+        System.out.println(" ");
+        System.out.println("================================================================");
+        System.out.println(" ");
+        for (Selecao listaSelecoe : listaSelecoes) {
+            System.out.println("Seleção " + listaSelecoe.getCor() + " nivel " + listaSelecoe.getPontosNivel());
+            for (Atleta listaAtleta : listaSelecoe.getListaAtletas()) {
+                System.out.println(String.format(" (%s)%s (%s)",
+                        listaAtleta.getPosicao().getDescricao().substring(0,1),
+                        listaAtleta.getNome(),
+                        listaAtleta.getNivel())
+                );
+            }
+        }
     }
 
 }
