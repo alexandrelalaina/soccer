@@ -9,7 +9,8 @@ public enum Posicao {
 
     DEFESA("DEFESA"),
     MEIO("MEIO"),
-    ATAQUE("ATAQUE");
+    ATAQUE("ATAQUE"),
+    TODAS("TODAS");
 
     private final String descricao;
 

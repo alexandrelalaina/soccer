@@ -15,16 +15,13 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class Convocacao {
 
-    private final Integer qtdAtletasLinha = 6;
     private final Integer qtdAtletasDefesa = 3;
     private final Integer qtdAtletasMeio = 2;
     private final Integer qtdAtletasAtaque = 1;
+    private final Integer qtdAtletasLinha = qtdAtletasDefesa + qtdAtletasMeio + qtdAtletasAtaque;
 
     private Integer qtdTimes;
-    // todos os atletas
     private List<Atleta> listaAtletas;
-    // atletas selecionados
-//    private List<Atleta> atletasEscalados;
 
     public Convocacao() {
         validarQtdPosicaoTime();
@@ -109,73 +106,6 @@ public class Convocacao {
         }
     }
 
-//    public List<Selecao> sortearSelecoesOld(){
-//        Selecao azul = new Selecao(Cor.AZUL);
-//        Selecao vermelho = new Selecao(Cor.VERMELHO);
-//        Selecao amarelo = new Selecao(Cor.AMARELO);
-//        Selecao branco = new Selecao(Cor.BRANCO);
-//
-//        List<Atleta> listaSorteio = new ArrayList<>();
-//        List<Atleta> listaAtletasDefesa = ordenarAtletasPosicaoNivel(Posicao.DEFESA);
-//        List<Atleta> listaAtletasMeio = ordenarAtletasPosicaoNivel(Posicao.MEIO);
-//        List<Atleta> listaAtletasAtaque = ordenarAtletasPosicaoNivel(Posicao.ATAQUE);
-//
-//        String pickCor;
-//        String pickPosicao = Posicao.DEFESA.getDescricao();
-//        Boolean timesSorteados = false;
-//
-//        // 3 defesa // 2 meio // 1 ataque
-//        while (! timesSorteados) {
-//            pickCor = Cor.AZUL.getDescricao();
-//
-//            if (pickPosicao.equals(Posicao.DEFESA.getDescricao())){
-//                listaSorteio = listaAtletasDefesa;
-//                pickPosicao = Posicao.MEIO.getDescricao();
-//            } else if (pickPosicao.equals(Posicao.MEIO.getDescricao())) {
-//                listaSorteio = listaAtletasMeio;
-//                pickPosicao = Posicao.ATAQUE.getDescricao();
-//            } else if (pickPosicao.equals(Posicao.ATAQUE.getDescricao())) {
-//                listaSorteio = listaAtletasAtaque;
-//                timesSorteados = true;
-//            }
-//
-//            for (Atleta listaSorteioAtletas : listaSorteio) {
-//                System.out.println("Distribuindo Defesa - Atleta => " + listaSorteioAtletas.toString());
-//                if (pickCor.equals(Cor.AZUL.getDescricao())) {
-//                    azul.addAtleta(listaSorteioAtletas);
-//                    pickCor = Cor.VERMELHO.getDescricao();
-//                } else if (pickCor.equals(Cor.VERMELHO.getDescricao())) {
-//                    vermelho.addAtleta(listaSorteioAtletas);
-//                    if (this.qtdTimes >= 3) {
-//                        pickCor = Cor.AMARELO.getDescricao();
-//                    } else {
-//                        pickCor = Cor.AZUL.getDescricao();
-//                    }
-//                } else if (pickCor.equals(Cor.AMARELO.getDescricao())) {
-//                    amarelo.addAtleta(listaSorteioAtletas);
-//                    if (this.qtdTimes >= 4) {
-//                        pickCor = Cor.BRANCO.getDescricao();
-//                    } else {
-//                        pickCor = Cor.AZUL.getDescricao();
-//                    }
-//                }
-//            }
-//        }
-//
-//        List<Selecao> listSelecoes = new ArrayList<>();
-//
-//        listSelecoes.add(azul);
-//        listSelecoes.add(vermelho);
-//        if (this.qtdTimes >= 3) {
-//            listSelecoes.add(amarelo);
-//        }
-//        if (this.qtdTimes >= 4) {
-//            listSelecoes.add(branco);
-//        }
-//
-//        return listSelecoes;
-//    }
-
     public List<Selecao> sortearSelecoes(){
         List<Selecao> listaSelecoes = new ArrayList<>();
 
@@ -194,50 +124,125 @@ public class Convocacao {
             listaSelecoes.add(branco);
         }
 
-        List<Atleta> listaSorteio = new ArrayList<>();
-        List<Atleta> listaAtletasDefesa = ordenarAtletasPosicaoNivel(Posicao.DEFESA);
-        List<Atleta> listaAtletasMeio = ordenarAtletasPosicaoNivel(Posicao.MEIO);
-        List<Atleta> listaAtletasAtaque = ordenarAtletasPosicaoNivel(Posicao.ATAQUE);
+//        List<Atleta> listaSorteio = new ArrayList<>();
+//        List<Atleta> listaAtletasDefesa = ordenarAtletasPosicaoNivel(Posicao.DEFESA);
+//        List<Atleta> listaAtletasMeio = ordenarAtletasPosicaoNivel(Posicao.MEIO);
+//        List<Atleta> listaAtletasAtaque = ordenarAtletasPosicaoNivel(Posicao.ATAQUE);
 
         // ATAQUE
-        int i = 0;
+        int iPosicao = 1;
+        int qtdAtletasNaPosicao = 0;
+        int qtdAtletasNaPosicaoEscalados = 0;
         String selecaoParaAtleta;
-        for (Atleta atleta : listaAtletasAtaque) {
-            selecaoParaAtleta = recuperarSelecaoMenorNivel(listaSelecoes);
-            // inserir atleta para a selecao
-            // TODO refator com streams
-            for (Selecao lista : listaSelecoes) {
-                if (lista.getCor().getDescricao().equals(selecaoParaAtleta.toString())){
-                    lista.addAtleta(atleta);
+        boolean sorteioFinalizado = false;
+        List<Atleta> listaSorteio = new ArrayList<>();
+
+        while (! sorteioFinalizado) {
+            qtdAtletasNaPosicaoEscalados = 0;
+            if (iPosicao==1){
+                listaSorteio = ordenarAtletasPosicaoNivel(Posicao.ATAQUE);
+                qtdAtletasNaPosicao = this.qtdAtletasAtaque;
+                System.out.println(String.format("\nSortear %d Atletas da posição de Ataque!", listaSorteio.size()) );
+            } else if (iPosicao==2){
+                listaSorteio = ordenarAtletasPosicaoNivel(Posicao.MEIO);
+                qtdAtletasNaPosicao = this.qtdAtletasMeio;
+                System.out.println(String.format("\nSortear %d Atletas da posição de Meio!", listaSorteio.size()) );
+            } else if (iPosicao==3){
+                listaSorteio = ordenarAtletasPosicaoNivel(Posicao.DEFESA);
+                qtdAtletasNaPosicao = this.qtdAtletasDefesa;
+                System.out.println(String.format("\nSortear %d Atletas da posição de Defesa!", listaSorteio.size()) );
+            } else if (iPosicao==4){
+                listaSorteio = ordenarAtletasPosicaoNivel(Posicao.TODAS);
+                qtdAtletasNaPosicao = this.qtdAtletasDefesa + this.qtdAtletasMeio + this.qtdAtletasAtaque;
+                qtdAtletasNaPosicaoEscalados = qtdAtletasJaEscalados(listaSelecoes);
+                System.out.println(String.format("\nSortear %d Atletas em qualquer posição...", listaSorteio.size()) );
+            }
+
+            for (Atleta atleta : listaSorteio) {
+                // inserir atleta para a selecao
+                // TODO refator com streams
+                for (Selecao lista : listaSelecoes) {
+                    selecaoParaAtleta = recuperarSelecaoMenorNivel(listaSelecoes);
+                    if (lista.getCor().toString().equals(selecaoParaAtleta)) {
+                        lista.addAtleta(atleta);
+                        break;
+                    }
+                }
+
+                qtdAtletasNaPosicaoEscalados++;
+                if (qtdAtletasNaPosicaoEscalados == this.qtdTimes * qtdAtletasNaPosicao) {
                     break;
                 }
             }
-
-            i++;
-            if (i==3){
+            iPosicao++;
+            if (iPosicao==5){
+                sorteioFinalizado = true;
                 break;
             }
         }
 
+        listaSelecoes = ordenarListaSelecaoFinal(listaSelecoes);
+
         return listaSelecoes;
     }
 
+    private List<Selecao> ordenarListaSelecaoFinal(List<Selecao> listaSelecoes) {
+        var listaSelecoesAtualizada = listaSelecoes;
+        // atualizar lista de jogadores
+        // TODO refatorar ordenacao
+        int i = 0;
+        for (Selecao lista : listaSelecoes) {
+            List<Atleta> listaAtletasOrdenada = lista.getListaAtletas()
+                    .stream()
+                    .sorted(Comparator.comparing(Atleta::getNivel))
+                    .sorted(Comparator.comparing(Atleta::getPosicao))
+                    .collect(Collectors.toList());
+            listaSelecoesAtualizada.get(i).setListaAtletas(listaAtletasOrdenada);
+            i++;
+        }
+        return listaSelecoesAtualizada;
+    }
+
+    private int qtdAtletasJaEscalados(List<Selecao> listaSelecoes) {
+        return listaSelecoes.stream()
+                .collect(Collectors.summingInt(value -> value.getQtdAtletas()));
+    }
+
     private String recuperarSelecaoMenorNivel(List<Selecao> listaSelecoes) {
-        listaSelecoes.stream()
-                .sorted(Comparator.comparing(Selecao::getPontosNivel))
+        List<Selecao> aux = listaSelecoes.stream()
+//                .sorted(Comparator.comparing(Selecao::getQtdAtletas))
+                .filter(selecao -> selecao.getQtdAtletas() < this.qtdAtletasLinha)
+                .sorted(Comparator.comparingInt(Selecao::getPontosNivel))
                 .collect(Collectors.toList());
-        return listaSelecoes.get(0).getCor().toString();
+//        // como nao posso
+//        for (Selecao selecao : aux) {
+//            if (aux.get(0).getQtdAtletas() != this.qtdAtletasLinha){
+//                break;
+//            }
+//        }
+        return aux.get(0).getCor().toString();
     }
 
     private List<Atleta> ordenarAtletasPosicaoNivel(Posicao posicao) {
-        List<Atleta> filtro = this.listaAtletas
-                .stream()
-                .filter(a -> a.getPosicao().equals(posicao))
-                .filter(a -> a.getEscalado()==Boolean.FALSE)
-                .sorted(Comparator.comparing(Atleta::getNivel).reversed())
-                .collect(Collectors.toList());
+        List<Atleta> filtro;
 
-        System.out.println("Atletas de " + posicao.getDescricao());
+        if (posicao.equals(Posicao.TODAS)) {
+            filtro = this.listaAtletas
+                    .stream()
+                    .filter(a -> a.getEscalado() == Boolean.FALSE)
+                    .sorted(Comparator.comparing(Atleta::getNivel).reversed())
+                    .collect(Collectors.toList());
+            System.out.println("Atletas de TODAS as posições que faltam ser escalados");
+        } else {
+            filtro = this.listaAtletas
+                    .stream()
+                    .filter(a -> a.getPosicao().equals(posicao))
+                    .filter(a -> a.getEscalado()==Boolean.FALSE)
+                    .sorted(Comparator.comparing(Atleta::getNivel).reversed())
+                    .collect(Collectors.toList());
+            System.out.println("Atletas de " + posicao.getDescricao());
+        }
+
         for (Atleta atleta : filtro) {
             System.out.println(atleta);
         }

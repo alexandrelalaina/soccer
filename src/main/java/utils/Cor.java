@@ -8,10 +8,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Cor {
 
-    AZUL("Azul"),
-    VERMELHO("Vermelho"),
-    AMARELO("Amarelo"),
-    BRANCO("Branco");
+    AZUL("AZUL"),
+    VERMELHO("VERMELHO"),
+    AMARELO("AMARELO"),
+    BRANCO("BRANCO");
 
     private final String descricao;
 
