@@ -3,8 +3,8 @@ package processo;
 import exception.ExceptionQtdPosicaoTime;
 import model.Atleta;
 import model.Selecao;
-import utils.Cor;
-import utils.Posicao;
+import model.Cor;
+import model.Posicao;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -55,44 +55,31 @@ public class Convocacao {
         }
 
         // dividir atletas por nivel
-        count = this.listaAtletas
-                .stream()
-                .filter(a -> a.getNivel() == 1)
-                .collect(Collectors.counting());
+        count = Atleta.countAtletasPorNivel(this.listaAtletas, 1);
+
         info = info + "\n" + count + " atletas nivel 1";
 
-        // dividir atletas por nivel
-        count = this.listaAtletas
-                .stream()
-                .filter(a -> a.getNivel() == 2)
-                .collect(Collectors.counting());
+        count = Atleta.countAtletasPorNivel(this.listaAtletas, 2);
+
         info = info + "\n" + count + " atletas nivel 2";
 
-        // dividir atletas por nivel
-        count = this.listaAtletas
-                .stream()
-                .filter(a -> a.getNivel() == 3)
-                .collect(Collectors.counting());
+        count = Atleta.countAtletasPorNivel(this.listaAtletas, 3);
+
         info = info + "\n" + count + " atletas nivel 3";
 
         // atletas por posicao
-        count = this.listaAtletas
-                .stream()
-                .filter(a -> a.getPosicao().equals(Posicao.DEFESA))
-                .collect(Collectors.counting());
-        info = info + "\n" + count + " atletas de " + Posicao.DEFESA;
 
-        count = this.listaAtletas
-                .stream()
-                .filter(a -> a.getPosicao().equals(Posicao.MEIO))
-                .collect(Collectors.counting());
-        info = info + "\n" + count + " atletas de " + Posicao.MEIO;
+        count = Atleta.countAtletasPorPosicao(this.listaAtletas, Posicao.DEFESA);
 
-        count = this.listaAtletas
-                .stream()
-                .filter(a -> a.getPosicao().equals(Posicao.ATAQUE))
-                .collect(Collectors.counting());
-        info = info + "\n" + count + " atletas de " + Posicao.ATAQUE;
+        info = info + "\n" + count + " atletas de " + Posicao.DEFESA.getDescricao();
+
+        count = Atleta.countAtletasPorPosicao(this.listaAtletas, Posicao.MEIO);
+
+        info = info + "\n" + count + " atletas de " + Posicao.MEIO.getDescricao();
+
+        count = Atleta.countAtletasPorPosicao(this.listaAtletas, Posicao.ATAQUE);
+
+        info = info + "\n" + count + " atletas de " + Posicao.ATAQUE.getDescricao();
 
         System.out.println("\nRelação dos Atletas\n" + info);
     }

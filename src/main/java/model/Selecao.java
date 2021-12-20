@@ -1,7 +1,6 @@
 package model;
 
 import lombok.Data;
-import utils.Cor;
 
 import java.util.ArrayList;
 import java.util.List;

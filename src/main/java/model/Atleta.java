@@ -1,10 +1,9 @@
 package model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
-import utils.Posicao;
+
+import java.util.List;
+import java.util.Objects;
 
 @Data
 public class Atleta {
@@ -18,5 +17,17 @@ public class Atleta {
         this.nome = nome;
         this.nivel = nivel;
         this.posicao = posicao;
+    }
+
+    public static long countAtletasPorNivel(List<Atleta> listaAtletas, Integer nivel) {
+        return listaAtletas
+                .stream()
+                .filter(a -> Objects.equals(a.getNivel(), nivel)).count();
+    }
+
+    public static long countAtletasPorPosicao(List<Atleta> listaAtletas, Posicao posicao) {
+        return listaAtletas
+                .stream()
+                .filter(a -> a.getPosicao().equals(posicao)).count();
     }
 }
