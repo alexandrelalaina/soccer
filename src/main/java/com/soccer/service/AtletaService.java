@@ -9,12 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AtletasService {
+public class AtletaService {
 
     private List<Atleta> atletaList = new ArrayList<>();
 
     @PostConstruct
     public void init() {
+        atletaList.add(new Atleta("1", 1, Posicao.ATAQUE));
+        atletaList.add(new Atleta("2", 2, Posicao.ATAQUE));
+        atletaList.add(new Atleta("3", 3, Posicao.ATAQUE));
+        atletaList.add(new Atleta("4", 4, Posicao.ATAQUE));
+        atletaList.add(new Atleta("5", 5, Posicao.ATAQUE));
+
         atletaList.add(new Atleta("Abdal", 3, Posicao.ATAQUE));
         atletaList.add(new Atleta("Vinicius ", 3, Posicao.ATAQUE));
         atletaList.add(new Atleta("Régis", 2, Posicao.DEFESA));

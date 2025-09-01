@@ -25,7 +25,7 @@ public class ConvocacaoService {
     private List<Atleta> listaAtletas;
 
     @Autowired
-    private AtletasService atletasService;
+    private AtletaService atletaService;
 
     public ConvocacaoService() {
         validarQtdPosicaoTime();
@@ -94,7 +94,7 @@ public class ConvocacaoService {
     }
 
     private void relacionarAtletas(){
-        this.listaAtletas = atletasService.getAtletaList();
+        this.listaAtletas = atletaService.getAtletaList();
 
         this.listaAtletas
                 .stream()
