@@ -1,6 +1,5 @@
-package model;
+package com.soccer.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

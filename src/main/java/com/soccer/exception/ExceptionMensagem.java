@@ -1,4 +1,4 @@
-package exception;
+package com.soccer.exception;
 
 public class ExceptionMensagem extends RuntimeException{
 

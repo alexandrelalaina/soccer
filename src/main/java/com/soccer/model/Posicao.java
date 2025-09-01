@@ -1,4 +1,4 @@
-package model;
+package com.soccer.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package model;
+package com.soccer.model;
 
 import lombok.Data;
 
@@ -12,11 +12,13 @@ public class Atleta {
     private Integer nivel;  // 1 baixo // 2 medio // 3 bom
     private Posicao posicao;
     private Boolean escalado = false;
+//    private AtletaStatus atletaStatus;
 
     public Atleta(String nome, Integer nivel, Posicao posicao) {
         this.nome = nome;
         this.nivel = nivel;
         this.posicao = posicao;
+//        this.atletaStatus = AtletaStatus.INATIVO;
     }
 
     public static long countAtletasPorNivel(List<Atleta> listaAtletas, Integer nivel) {
@@ -28,6 +30,7 @@ public class Atleta {
     public static long countAtletasPorPosicao(List<Atleta> listaAtletas, Posicao posicao) {
         return listaAtletas
                 .stream()
-                .filter(a -> a.getPosicao().equals(posicao)).count();
+                .filter(a -> a.getPosicao().equals(posicao))
+                .count();
     }
 }
