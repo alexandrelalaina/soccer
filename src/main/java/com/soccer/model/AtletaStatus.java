@@ -5,12 +5,11 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum Posicao {
+public enum AtletaStatus {
 
-    DEFESA("Defesa"),
-    MEIO("Meio"),
-    ATAQUE("Ataque"),
-    TODAS("TODAS");
+    INATIVO("INATIVO"),
+    ATIVO_MENSALISTA("ATIVO_MENSALISTA"),
+    ATIVO_AVULSO("ATIVO_AVULSO");
 
     private final String descricao;
 

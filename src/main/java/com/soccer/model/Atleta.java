@@ -12,13 +12,20 @@ public class Atleta {
     private Integer nivel;  // 1 baixo // 2 medio // 3 bom
     private Posicao posicao;
     private Boolean escalado = false;
-//    private AtletaStatus atletaStatus;
+    private AtletaStatus atletaStatus;
 
     public Atleta(String nome, Integer nivel, Posicao posicao) {
         this.nome = nome;
         this.nivel = nivel;
         this.posicao = posicao;
-//        this.atletaStatus = AtletaStatus.INATIVO;
+        this.atletaStatus = AtletaStatus.INATIVO;
+    }
+
+    public Atleta(String nome, Integer nivel, Posicao posicao, AtletaStatus atletaStatus) {
+        this.nome = nome;
+        this.nivel = nivel;
+        this.posicao = posicao;
+        this.atletaStatus = atletaStatus;
     }
 
     public static long countAtletasPorNivel(List<Atleta> listaAtletas, Integer nivel) {

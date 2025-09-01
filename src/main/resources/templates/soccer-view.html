@@ -13,12 +13,13 @@
                 <th>Nome</th>
                 <th>Posição</th>
                 <th></th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="atleta : ${atletaList}">
                 <td th:text="${atleta.nome}">Nome do Jogador</td>
-                <td th:text="${atleta.posicao}">Posição do Jogador</td>
+                <td th:text="${{atleta.posicao}}">Posição do Jogador</td>
                 <td>
                     <span th:if="${atleta.nivel == 1}">&#x1F534; <span th:text="${atleta.nivel}"></span></span>
                     <span th:if="${atleta.nivel == 2}">&#x1F7E1; <span th:text="${atleta.nivel}"></span></span>
@@ -26,6 +27,7 @@
                     <span th:if="${atleta.nivel == 4}">&#x1F535; <span th:text="${atleta.nivel}"></span></span>
                     <span th:if="${atleta.nivel == 5}">&#x1F7E2; <span th:text="${atleta.nivel}"></span></span>
                 </td>
+                <td th:text="${atleta.atletaStatus}">Status do Jogador</td>
             </tr>
         </tbody>
 </body>
