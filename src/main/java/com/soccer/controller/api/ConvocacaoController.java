@@ -1,4 +1,4 @@
-package com.soccer.controller;
+package com.soccer.controller.api;
 
 import com.soccer.model.Selecao;
 import com.soccer.service.ConvocacaoService;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/convocacao")
+@RequestMapping("/api/v1/convocacao")
 @RestController
 public class ConvocacaoController {
 

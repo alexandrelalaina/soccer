@@ -1,4 +1,4 @@
-package com.soccer.controller;
+package com.soccer.controller.app;
 
 import com.soccer.model.Atleta;
 import com.soccer.service.AtletaService;
@@ -6,20 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@RequestMapping("/atletas")
 @Controller
-public class HomeViewController {
+public class AtletasViewController {
 
     @Autowired
     private AtletaService atletaService;
 
     @GetMapping
-    public String home(Model model) {
+    public String homeAtletas(Model model) {
         List<Atleta> atletaList = atletaService.getAtletaList();
         model.addAttribute("atletaList", atletaList);
-        return "soccer-view";
+        return "atletas-view";
     }
 
 }
