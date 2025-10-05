@@ -2,7 +2,7 @@ package com.soccer.service;
 
 import com.soccer.exception.ExceptionQtdPosicaoTime;
 import com.soccer.model.Atleta;
-import com.soccer.model.Posicao;
+import com.soccer.model.PosicaoEnum;
 import com.soccer.model.Selecao;
 import com.soccer.model.Cor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,19 +47,19 @@ public class ConvocacaoService {
         while (! sorteioFinalizado) {
             qtdAtletasNaPosicaoEscalados = 0;
             if (iPosicao==1){
-                listaSorteio = ordenarAtletasPosicaoNivel(Posicao.ATAQUE);
+                listaSorteio = ordenarAtletasPosicaoNivel(PosicaoEnum.ATAQUE);
                 qtdAtletasNaPosicao = this.qtdAtletasAtaque;
                 System.out.println(String.format("\nSortear %d Atletas da posição de Ataque!", listaSorteio.size()) );
             } else if (iPosicao==2){
-                listaSorteio = ordenarAtletasPosicaoNivel(Posicao.MEIO);
+                listaSorteio = ordenarAtletasPosicaoNivel(PosicaoEnum.MEIO);
                 qtdAtletasNaPosicao = this.qtdAtletasMeio;
                 System.out.println(String.format("\nSortear %d Atletas da posição de Meio!", listaSorteio.size()) );
             } else if (iPosicao==3){
-                listaSorteio = ordenarAtletasPosicaoNivel(Posicao.DEFESA);
+                listaSorteio = ordenarAtletasPosicaoNivel(PosicaoEnum.DEFESA);
                 qtdAtletasNaPosicao = this.qtdAtletasDefesa;
                 System.out.println(String.format("\nSortear %d Atletas da posição de Defesa!", listaSorteio.size()) );
             } else if (iPosicao==4){
-                listaSorteio = ordenarAtletasPosicaoNivel(Posicao.TODAS);
+                listaSorteio = ordenarAtletasPosicaoNivel(PosicaoEnum.TODAS);
                 qtdAtletasNaPosicao = this.qtdAtletasDefesa + this.qtdAtletasMeio + this.qtdAtletasAtaque;
                 qtdAtletasNaPosicaoEscalados = qtdAtletasJaEscalados(listaSelecoes);
                 System.out.println(String.format("\nSortear %d Atletas em qualquer posição...", listaSorteio.size()) );
@@ -135,17 +135,17 @@ public class ConvocacaoService {
 
         // atletas por posicao
 
-        count = Atleta.countAtletasPorPosicao(this.listaAtletas, Posicao.DEFESA);
+        count = Atleta.countAtletasPorPosicao(this.listaAtletas, PosicaoEnum.DEFESA);
 
-        info = info + "\n" + count + " atletas de " + Posicao.DEFESA.getDescricao();
+        info = info + "\n" + count + " atletas de " + PosicaoEnum.DEFESA.getDescricao();
 
-        count = Atleta.countAtletasPorPosicao(this.listaAtletas, Posicao.MEIO);
+        count = Atleta.countAtletasPorPosicao(this.listaAtletas, PosicaoEnum.MEIO);
 
-        info = info + "\n" + count + " atletas de " + Posicao.MEIO.getDescricao();
+        info = info + "\n" + count + " atletas de " + PosicaoEnum.MEIO.getDescricao();
 
-        count = Atleta.countAtletasPorPosicao(this.listaAtletas, Posicao.ATAQUE);
+        count = Atleta.countAtletasPorPosicao(this.listaAtletas, PosicaoEnum.ATAQUE);
 
-        info = info + "\n" + count + " atletas de " + Posicao.ATAQUE.getDescricao();
+        info = info + "\n" + count + " atletas de " + PosicaoEnum.ATAQUE.getDescricao();
 
         System.out.println("\nRelação dos Atletas\n" + info);
     }
@@ -216,10 +216,10 @@ public class ConvocacaoService {
         return aux.get(0).getCor().toString();
     }
 
-    private List<Atleta> ordenarAtletasPosicaoNivel(Posicao posicao) {
+    private List<Atleta> ordenarAtletasPosicaoNivel(PosicaoEnum posicaoEnum) {
         List<Atleta> filtro;
 
-        if (posicao.equals(Posicao.TODAS)) {
+        if (posicaoEnum.equals(PosicaoEnum.TODAS)) {
             filtro = this.listaAtletas
                     .stream()
                     .filter(a -> a.getEscalado() == Boolean.FALSE)
@@ -229,11 +229,11 @@ public class ConvocacaoService {
         } else {
             filtro = this.listaAtletas
                     .stream()
-                    .filter(a -> a.getPosicao().equals(posicao))
+                    .filter(a -> a.getPosicao().equals(posicaoEnum))
                     .filter(a -> a.getEscalado()==Boolean.FALSE)
                     .sorted(Comparator.comparing(Atleta::getNivel).reversed())
                     .collect(Collectors.toList());
-            System.out.println("Atletas de " + posicao.getDescricao());
+            System.out.println("Atletas de " + posicaoEnum.getDescricao());
         }
 
         for (Atleta atleta : filtro) {

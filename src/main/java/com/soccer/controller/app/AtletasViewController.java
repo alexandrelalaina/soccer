@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@RequestMapping("/atletas")
+@RequestMapping("/app/v1/atletas")
 @Controller
 public class AtletasViewController {
 
@@ -19,7 +19,7 @@ public class AtletasViewController {
 
     @GetMapping
     public String homeAtletas(Model model) {
-        List<Atleta> atletaList = atletaService.getAtletaList();
+        List<Atleta> atletaList = atletaService.getOrdenarPadraoList();
         model.addAttribute("atletaList", atletaList);
         return "atletas-view";
     }
