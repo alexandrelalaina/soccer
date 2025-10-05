@@ -7,9 +7,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum AtletaStatusEnum {
 
-    INATIVO("INATIVO"),
-    ATIVO_MENSALISTA("ATIVO_MENSALISTA"),
-    ATIVO_AVULSO("ATIVO_AVULSO");
+    MENSALISTA("MENSALISTA"),
+    AVULSO("AVULSO"),
+    GOLEIRO("GOLEIRO"),
+    INATIVO("INATIVO");
 
     private final String descricao;
 

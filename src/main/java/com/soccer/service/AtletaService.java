@@ -28,20 +28,20 @@ public class AtletaService {
                         return Integer.compare(ordenadoPorStatus1, ordenadoPorStatus2);
                     }
 
-                    //nivel
-                    int ordenadoPorNivel1 = ordenarPorNivel(a1.getNivel());
-                    int ordenadoPorNivel2 = ordenarPorNivel(a2.getNivel());
-
-                    if (ordenadoPorNivel1 != ordenadoPorNivel2) {
-                        return Integer.compare(ordenadoPorNivel1, ordenadoPorNivel2);
-                    }
-
                     //posicao
                     int ordenacaoPorPosicao1 = ordenarPorPosicao(a1.getPosicao());
                     int ordenacaoPorPosicao2 = ordenarPorPosicao(a2.getPosicao());
 
                     if (ordenacaoPorPosicao1 != ordenacaoPorPosicao2) {
                         return Integer.compare(ordenacaoPorPosicao1, ordenacaoPorPosicao2);
+                    }
+
+                    //nivel
+                    int ordenadoPorNivel1 = ordenarPorNivel(a1.getNivel());
+                    int ordenadoPorNivel2 = ordenarPorNivel(a2.getNivel());
+
+                    if (ordenadoPorNivel1 != ordenadoPorNivel2) {
+                        return Integer.compare(ordenadoPorNivel1, ordenadoPorNivel2);
                     }
 
                     //nome
@@ -51,17 +51,19 @@ public class AtletaService {
     }
 
     private int ordenarPorPosicao(PosicaoEnum posicao) {
-        if (posicao == PosicaoEnum.DEFESA) return 1;
-        if (posicao == PosicaoEnum.MEIO) return 2;
-        if (posicao == PosicaoEnum.ATAQUE) return 3;
-        return 0;
+        if (posicao == PosicaoEnum.GOLEIRO) return 1;
+        if (posicao == PosicaoEnum.DEFESA) return 2;
+        if (posicao == PosicaoEnum.MEIO) return 3;
+        if (posicao == PosicaoEnum.ATAQUE) return 4;
+        return 10;
     }
 
     private int ordenarPorStatus(AtletaStatusEnum status) {
-        if (status == AtletaStatusEnum.ATIVO_MENSALISTA) return 0;
-        if (status == AtletaStatusEnum.ATIVO_AVULSO) return 1;
-        if (status == AtletaStatusEnum.INATIVO) return 2;
-        return 3;
+        if (status == AtletaStatusEnum.GOLEIRO) return 1;
+        if (status == AtletaStatusEnum.MENSALISTA) return 2;
+        if (status == AtletaStatusEnum.AVULSO) return 3;
+        if (status == AtletaStatusEnum.INATIVO) return 4;
+        return 10;
     }
 
     private int ordenarPorNivel(Integer nivel) {
@@ -70,35 +72,40 @@ public class AtletaService {
         if (nivel == 3) return 3;
         if (nivel == 2) return 4;
         if (nivel == 1) return 5;
-        return 6;
+        return 10;
     }
 
     @PostConstruct
     private void init() {
-        atletaList.add(new Atleta("La Laina", 3, PosicaoEnum.MEIO, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Abdal", 3, PosicaoEnum.ATAQUE, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Fabinho", 2, PosicaoEnum.MEIO));
-        atletaList.add(new Atleta("Vinicius ", 3, PosicaoEnum.ATAQUE, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Régis", 2, PosicaoEnum.DEFESA, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Piagge", 2, PosicaoEnum.DEFESA, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Bruno", 3, PosicaoEnum.MEIO, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Luiz ( jogador novo )", 2, PosicaoEnum.DEFESA, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Duzão", 3, PosicaoEnum.DEFESA, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Cesar", 1, PosicaoEnum.MEIO, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Lan", 3, PosicaoEnum.MEIO, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Ricardo", 1, PosicaoEnum.MEIO, AtletaStatusEnum.ATIVO_MENSALISTA));
-        atletaList.add(new Atleta("Pipo", 1, PosicaoEnum.ATAQUE, AtletaStatusEnum.ATIVO_AVULSO));
-        atletaList.add(new Atleta("Nilo ", 2, PosicaoEnum.DEFESA, AtletaStatusEnum.ATIVO_AVULSO));
-        atletaList.add(new Atleta("Pike", 1, PosicaoEnum.DEFESA, AtletaStatusEnum.ATIVO_AVULSO));
-        atletaList.add(new Atleta("Matheus", 2, PosicaoEnum.MEIO, AtletaStatusEnum.ATIVO_AVULSO));
-        atletaList.add(new Atleta("Muga", 3, PosicaoEnum.MEIO, AtletaStatusEnum.ATIVO_AVULSO));
-        atletaList.add(new Atleta("Vitão", 2, PosicaoEnum.ATAQUE, AtletaStatusEnum.ATIVO_AVULSO));
-        atletaList.add(new Atleta("Gabriel", 1, PosicaoEnum.MEIO, AtletaStatusEnum.ATIVO_AVULSO));
-        atletaList.add(new Atleta("Felipe Coêlho", 1, PosicaoEnum.MEIO));
-        atletaList.add(new Atleta("Lipão ", 2, PosicaoEnum.DEFESA));
-        atletaList.add(new Atleta("Caio", 2, PosicaoEnum.DEFESA));
-        atletaList.add(new Atleta("Lê ", 3, PosicaoEnum.MEIO));
-        atletaList.add(new Atleta("Markin", 1, PosicaoEnum.MEIO));
+        atletaList.add(new Atleta("Custela", 3, PosicaoEnum.GOLEIRO, AtletaStatusEnum.GOLEIRO));
+        atletaList.add(new Atleta("Loredo", 3, PosicaoEnum.GOLEIRO, AtletaStatusEnum.GOLEIRO));
+
+        atletaList.add(new Atleta("Lipão ", 3, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Andre", 1, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Juan", 4, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Matheus", 3, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Valdir", 4, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Luquinha", 4, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Lee", 4, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Luiz", 4, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Rigola", 4, PosicaoEnum.DEFESA, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Augusto", 4, PosicaoEnum.DEFESA, AtletaStatusEnum.AVULSO));
+
+        atletaList.add(new Atleta("La Laina", 5, PosicaoEnum.MEIO, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Muga", 4, PosicaoEnum.MEIO, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Gustavo Careca", 5, PosicaoEnum.MEIO, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Lan", 5, PosicaoEnum.MEIO, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Thiago Bispo", 4, PosicaoEnum.MEIO, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Robson", 4, PosicaoEnum.MEIO, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Luan", 4, PosicaoEnum.MEIO, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Rene", 4, PosicaoEnum.MEIO, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Stiven", 4, PosicaoEnum.MEIO, AtletaStatusEnum.AVULSO));
+        atletaList.add(new Atleta("Fercho", 4, PosicaoEnum.MEIO, AtletaStatusEnum.AVULSO));
+        atletaList.add(new Atleta("Celinho", 2, PosicaoEnum.MEIO, AtletaStatusEnum.AVULSO));
+
+        atletaList.add(new Atleta("Abdal", 5, PosicaoEnum.ATAQUE, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Pipo", 5, PosicaoEnum.ATAQUE, AtletaStatusEnum.MENSALISTA));
+        atletaList.add(new Atleta("Renan", 5, PosicaoEnum.ATAQUE, AtletaStatusEnum.AVULSO));
     }
 
 }

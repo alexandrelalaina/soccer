@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum PosicaoEnum {
 
+    GOLEIRO("Goleiro"),
     DEFESA("Defesa"),
     MEIO("Meio"),
     ATAQUE("Ataque"),
