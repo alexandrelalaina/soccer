@@ -12,14 +12,14 @@ import java.util.List;
 
 @RequestMapping("/app/v1/atletas")
 @Controller
-public class AtletasViewController {
+public class AtletasAppController {
 
     @Autowired
     private AtletaService atletaService;
 
     @GetMapping
     public String homeAtletas(Model model) {
-        List<Atleta> atletaList = atletaService.getOrdenarPadraoList();
+        List<Atleta> atletaList = atletaService.getAtletaListOrdenacaoPadrao();
         model.addAttribute("atletaList", atletaList);
         return "atletas-view";
     }

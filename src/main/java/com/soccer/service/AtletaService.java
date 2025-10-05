@@ -17,7 +17,7 @@ public class AtletaService {
 
     private final List<Atleta> atletaList = new ArrayList<>();
 
-    public List<Atleta> getOrdenarPadraoList() {
+    public List<Atleta> getAtletaListOrdenacaoPadrao() {
         return atletaList.stream()
                 .sorted((a1, a2) -> {
                     //status
