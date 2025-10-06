@@ -13,6 +13,8 @@ public class Atleta {
     private PosicaoEnum posicao;
     private Boolean escalado = false;
     private AtletaStatusEnum atletaStatus;
+    private Boolean convocado = false;
+    private Boolean espera = false;
 
     public Atleta(String nome, Integer nivel, PosicaoEnum posicao) {
         this.nome = nome;

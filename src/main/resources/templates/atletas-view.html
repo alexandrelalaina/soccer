@@ -7,7 +7,7 @@
 <body>
     <h1>Lista de jogadores</h1>
 
-    <button th:if="${botaoConvacacao}" th:text="'Convocação'"></button>
+    <button th:if="${botaoConvocacao}" th:text="'Convocação'"></button>
 
     <table border="1">
         <thead>
@@ -30,6 +30,18 @@
                     <span th:if="${atleta.nivel == 5}">&#x1F7E2; <span th:text="${atleta.nivel}"></span></span>
                 </td>
                 <td th:text="${atleta.atletaStatus}">Status do Jogador</td>
+
+                <td>
+                    <label>
+                        <input type="checkbox" th:checked="${atleta.convocado}" name="convocado"/>
+                        Convocado
+                    </label>
+                    <label>
+                        <input type="checkbox" th:checked="${atleta.espera}" name="espera"/>
+                        Espera
+                    </label>
+                </td>
+
             </tr>
         </tbody>
 </body>
